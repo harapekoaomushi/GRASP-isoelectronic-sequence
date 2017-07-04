@@ -1,0 +1,28 @@
+#!/bin/bash
+rscf92 << EOF
+n
+
+
+
+
+n
+erwf.TF
+n
+y
+1
+2p- 2p
+y
+n
+n
+n
+n
+n
+n
+y
+120
+n
+n
+n
+rscf92.wf
+rscf92.mix
+EOF

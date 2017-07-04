@@ -1,0 +1,28 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+  echo "指定された引数は$#個です。" 1>&2
+  echo "実行するには1個の引数が必要です。" 1>&2
+  exit 1
+fi
+
+CSFnum=`grep -A 2 "CSF contributions" $1"/rci92.sum" | awk 'NR==3{print $6 " " $9 " " $12}'`
+
+if [ "$CSFnum" = "1 3 2" ]
+then
+	CSFweight=`grep -A 2 "CSF contributions" $1"/rci92.sum" | awk 'NR==3{print $4 " " $7 " " $10}'`
+	echo "$1 $CSFweight" | tee -a CSFweight132.txt
+	
+	energy=`tail -n 1 $1"/rci92.sum" | awk '{print $6}'`
+	echo "$1 $energy" | tee -a energy.txt
+elif [ "$CSFnum" = "1 2 3" ]
+then
+	CSFweight=`grep -A 2 "CSF contributions" $1"/rci92.sum" | awk 'NR==3{print $4 " " $7 " " $10}'`
+	echo "$1 $CSFweight" | tee -a CSFweight123.txt
+	
+	energy=`tail -n 1 $1"/rci92.sum" | awk '{print $6}'`
+	echo "$1 $energy" | tee -a energy.txt
+else
+	echo "違う基底が上位に来ています。上位３位は$CSFnumです。"
+	echo "$1 $CSFnum" | tee -a expError.txt
+	exit -1
+fi
