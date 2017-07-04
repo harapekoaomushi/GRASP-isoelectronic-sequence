@@ -1,7 +1,9 @@
 #!/bin/bash
-PATH=$PATH:~/test_tools
+DIRBIN="$(cd "$(dirname "$0")"; pwd)/bin"
+PATH=$PATH:$DIRBIN
 uuid=$(uuidgen)
-cd ~/calc_temp
+mkdir -p ~/GRASP_result
+cd ~/GRASP_result
 mkdir $uuid
 cd $uuid
 bash -

@@ -1,4 +1,7 @@
 #!/bin/bash
+PWD_ORG=`pwd`
+LIBDIR="$(cd "$(dirname "$0")"; pwd)/../lib"
+cd $PWD_ORG
 
 if [ $# -ne 2 ] && [ ! $# = "0" ]; then
   echo "指定された引数は$#個です。" 1>&2
@@ -23,7 +26,7 @@ COLOR_OFF="\e[m"
 mkdir level1
 cd level1
 cp ../grasp92.csl ./
-cat ~/lib/isotopelist | while read line
+cat $LIBDIR/isotopelist | while read line
 do
 	set -- $line
 	AtomicNum=$1
@@ -48,7 +51,7 @@ cd ../
 mkdir level123
 cd level123
 cp ../grasp92.csl ./
-cat ~/lib/isotopelist | while read line
+cat $LIBDIR/isotopelist | while read line
 do
 	set -- $line
 	AtomicNum=$1
